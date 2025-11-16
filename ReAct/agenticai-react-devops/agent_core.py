@@ -65,21 +65,33 @@ class Agent:
             observation = self.act(action, action_input)
             self.memory.append_observation(observation)
 
-            # Simple policy: if tool returns high CPU, finish with analysis.
+            # Simple policy: if tool returns high CPU, finish with analysis and notify team.
             if isinstance(observation, dict) and observation.get('cpu_avg') is not None:
                 cpu_avg = observation['cpu_avg']
                 if cpu_avg >= 80:
-                    final_answer = f"High CPU observed ({cpu_avg}%). Possible cause: CPU-bound process. Suggest: inspect top processes, consider scaling or cgroup limits."
+                    final_answer = (
+                        f"High CPU observed ({cpu_avg}%). Possible cause: CPU-bound process. "
+                        "Suggest: inspect top processes, consider scaling or cgroup limits."
+                    )
+                    # --- NEW: call notifier if available ---
+                    if 'notify' in self.tools:
+                        notify_msg = f"ALERT: High CPU {cpu_avg}% detected. Recommend immediate investigation."
+                        # Use act() so that notifier output is printed and recorded in memory
+                        self.act('notify', notify_msg)
                     break
                 else:
                     # if CPU normal but still slow, fetch recent logs
-                    if 'logs_api' in self.tools:
+                    if 'get_recent_logs' in self.tools:
                         print('\nCPU is normal, fetching recent logs to look for I/O or errors...')
                         logs = self.act('get_recent_logs', 'last_10m')
                         self.memory.append_observation(logs)
                         # naive log analysis
                         if isinstance(logs, dict) and logs.get('errors'):
                             final_answer = f"Found errors in logs: {logs['errors'][:3]}. Likely application-level issue."
+                            # OPTIONAL: notify team about errors
+                            if 'notify' in self.tools:
+                                notify_msg = f"ALERT: Errors found in logs: {logs['errors'][:3]}"
+                                self.act('notify', notify_msg)
                         else:
                             final_answer = "No obvious CPU or error log cause found. Recommend deeper profiling and network checks."
                         break
