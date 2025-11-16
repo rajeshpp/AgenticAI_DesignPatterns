@@ -1,0 +1,3 @@
+# Minimal deps. Optional: install openai to enable the OpenAIAdapter.
+python-dotenv>=1.0.0
+attrs>=23.1.0
