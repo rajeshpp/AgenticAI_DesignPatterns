@@ -1,0 +1,8 @@
+{
+  "name": "Demo Portfolio",
+  "positions": [
+    {"ticker": "AAPL", "shares": 10},
+    {"ticker": "MSFT", "shares": 5},
+    {"ticker": "GOOGL", "shares": 2}
+  ]
+}
