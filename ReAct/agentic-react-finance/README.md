@@ -10,3 +10,6 @@ This is a small ReAct-style agent that demonstrates reasoning and acting cycles 
 python -m venv .venv
 source .venv/bin/activate  # or .venv\Scripts\activate on Windows
 pip install -r requirements.txt
+
+$ python agent.py --portfolio examples/sample_portfolio.json --days 30 --react-trace
+```
