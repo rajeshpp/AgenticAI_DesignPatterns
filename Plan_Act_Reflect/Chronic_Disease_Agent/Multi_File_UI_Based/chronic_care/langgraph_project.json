@@ -1,0 +1,44 @@
+{
+  "meta": {
+    "name": "ChronicCare Coach (LangGraph export)"
+  },
+  "nodes": [
+    {
+      "id": "plan",
+      "label": "PLAN",
+      "type": "python",
+      "code": "langgraph_app.plan_node"
+    },
+    {
+      "id": "act",
+      "label": "ACT",
+      "type": "python",
+      "code": "langgraph_app.act_node"
+    },
+    {
+      "id": "reflect",
+      "label": "REFLECT",
+      "type": "python",
+      "code": "langgraph_app.reflect_node"
+    }
+  ],
+  "edges": [
+    {
+      "from": "START",
+      "to": "plan"
+    },
+    {
+      "from": "plan",
+      "to": "act"
+    },
+    {
+      "from": "act",
+      "to": "reflect"
+    },
+    {
+      "from": "reflect",
+      "to": "END"
+    }
+  ],
+  "entry_point": "plan"
+}
