@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Medication Interaction Assistant (POC)</title>
+</head>
+<body>
+  <h1>Medication Interaction Assistant</h1>
+
+  <label>Medications (comma-separated)</label><br />
+  <input id="meds" size="80" value="Warfarin, Amiodarone, Metformin, Ibuprofen" /><br /><br />
+
+  <label>Comorbidities (comma-separated)</label><br />
+  <input id="comorbs" size="80" value="CKD Stage 3" /><br /><br />
+
+  <button onclick="callApi()">Check Interactions</button>
+
+  <pre id="output"></pre>
+
+  <script>
+    async function callApi() {
+      const meds = document.getElementById('meds').value
+        .split(',')
+        .map(x => x.trim())
+        .filter(Boolean);
+      const comorbs = document.getElementById('comorbs').value
+        .split(',')
+        .map(x => x.trim())
+        .filter(Boolean);
+
+      const res = await fetch('http://localhost:8000/interactions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ medications: meds, comorbidities: comorbs })
+      });
+      const data = await res.json();
+      document.getElementById('output').textContent = JSON.stringify(data, null, 2);
+    }
+  </script>
+</body>
+</html>
