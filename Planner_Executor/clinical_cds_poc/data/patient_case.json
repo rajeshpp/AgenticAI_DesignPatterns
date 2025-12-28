@@ -1,0 +1,13 @@
+{
+  "age": 62,
+  "conditions": ["Type 2 Diabetes", "Chronic Kidney Disease", "Heart Failure"],
+  "symptoms": ["fatigue", "shortness of breath", "leg swelling"],
+  "labs": {
+    "HbA1c": 8.9,
+    "Creatinine": 2.3,
+    "eGFR": 28,
+    "BNP": 780
+  },
+  "medications": ["Metformin", "Furosemide", "Lisinopril"],
+  "allergies": []
+}
