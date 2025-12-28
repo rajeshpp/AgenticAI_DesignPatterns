@@ -1,0 +1,10 @@
+{
+  "patient_id": "P123",
+  "age": 68,
+  "language": "Hindi",
+  "literacy_level": "low",
+  "diagnosis": ["Heart Failure"],
+  "medications": ["Metformin", "Furosemide"],
+  "insurance": "Government Scheme",
+  "discharge_date": "2025-01-10"
+}
