@@ -1,3 +1,6 @@
+from langfuse import observe
+
+@observe(name="appointment_agent")
 def appointment_agent(state):
     return {
         "appointments": [

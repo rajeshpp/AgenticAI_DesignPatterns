@@ -1,7 +1,9 @@
 from langchain_openai import ChatOpenAI
+from langfuse import observe
 
 llm = ChatOpenAI(model="gpt-4o-mini")
 
+@observe(name="planner_agent")
 def planner_agent(state):
     patient = state["patient"]
 
