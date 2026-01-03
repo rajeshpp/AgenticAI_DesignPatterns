@@ -1,0 +1,6 @@
+{
+  "age": 52,
+  "condition": "Hypertension",
+  "medications": ["Amlodipine"],
+  "goals": ["Maintain BP < 130/80"]
+}
