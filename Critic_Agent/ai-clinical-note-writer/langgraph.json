@@ -1,0 +1,19 @@
+{
+  "dependencies": [
+    "langgraph",
+    "langchain",
+    "langchain-openai",
+    "openai",
+    "pydantic",
+    "python-dotenv"
+  ],
+  "graphs": {
+    "clinical_note_graph": {
+      "path": "app.graph:build_graph",
+      "description": "AI Clinical Note Writer with Safety Critic",
+      "input_schema": {
+        "doctor_input": "string"
+      }
+    }
+  }
+}
